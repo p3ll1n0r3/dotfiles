@@ -1,0 +1,140 @@
+
+! ------------------------------------------------------------------------------
+! theme colors
+! ------------------------------------------------------------------------------
+! special
+*.foreground: #ffd700
+*.background: #2b303b
+*.cursorColor: #c0c5ce
+
+*.color0: #2b303b
+*.color1: #bf616a
+*.color2: #a3be8c
+*.color3: #ebcb8b
+*.color4: #8fa1b3
+*.color5: #b48ead
+*.color6: #96b5b4
+*.color7: #65737e
+
+*.color8: #65737e
+*.color9: #bf616a
+*.color10: #a3be8c
+*.color11: #ebcb8b
+*.color12: #8fa1b3
+*.color13: #b48ead
+*.color14: #96b5b4
+*.color15: #F6F6F6
+
+! ------------------------------------------------------------------------------
+! URxvt
+! -----------------------------------------------------------------------------
+URxvt*termName:		rxvt-256color
+! URxvt*geometry:	240x84
+
+URxvt*saveline: 		300000
+URxvt.scrollBar:		false
+URxvt*scrollstyle:	plain
+URxvt.scrollBar_right:	false
+URxvt*scrollWithBuffer:	true
+
+URxvt*scrollTtyKeypress:true
+URxvt*scrollTtyOutput:	false
+URxvt*cursorBlink:	true
+URxvt*cursorUnderline:	true
+URxvt*cursorColor:	#F1F014
+
+URxvt*pointerColor2:	#002B36
+URxvt*fading:		20
+URxvt*borderColor:	[68]#131520
+!URxvt*borderLess:	true	
+!URxvt*letterSpace:	0
+
+URxvt.lineSpace:		1
+URxvt.intensityStyles:	false
+URxvt*colorUL:		#1a8cff
+URxvt.url-launcher:	/usr/bin/firefox
+URxvt*iso14755:		false
+
+URxvt*depth:		32
+URxvt*background:	[90]#2b303b
+URxvt*scrollBar_right:	false
+URxvt*internalBorder: 	0
+URxvt*externalBorder: 	0
+URxvt*letterSpace:	-1
+
+URxvt.font:		xft:monospace:size=8
+URxvt*boldFont:		xft:monospace:bold:size=8
+URxvt*italicFont:	xft:monospace:italic:size=8
+URxvt*boldItalicFont:	xft:monospace:bold:italic:size=8
+URxvt*allow_bold: 	true
+
+URxvt.perl-ext-common:	default,tabbed,clipboard,url-select,keyboard-select
+
+URxvt.copyCommand:	xclip -i -selection clipboard
+URxvt.pasteCommand:	xclip -o -selection clipboard
+URxvt.keysym.m-c: 	perl:clipboard:copy
+URxvt.keysym.m-v: 	perl:clipboard:paste
+
+URxvt.keysym.Home:	\033[1~
+URxvt.keysym.End:	\033[4~
+URxvt.keysym.KP_Home:	\033[1~
+URxvt.keysym.KP_End:	\033[4~
+
+URxvt.insecure:		false
+URxvt*visualBell:	false 
+
+URxvt.urlLauncher:	exo-open
+URxvt.underlineURLs:	true
+URxvt.urlButton:	1
+
+URxvt.tabbed.autohide:	yes
+URxvt.tabbed.tabbar-fg:	10
+URxvt.tabbed.tabbar-bg:	8
+URxvt.tabbed.tab-fg:	6
+URxvt.tabbed.tab-bg:	16
+URxvt.tabbed.title:	yes
+URxvt.tabbed.new-button:false
+
+!URxvt*buffered:		false
+
+! ------------------------------------------------------------------------------
+! Rofi
+! ------------------------------------------------------------------------------
+rofi.font: DejaVu Sans Mono Book 16 
+! rofi.color-window: #2b303b, #2b303b, #2b303b
+! rofi.color-normal: #2b303b, #c0c5ce, #2b303b, #8fa1b3, #2b303b
+rofi.separator-style: solid
+rofi.terminal:		   urxvt 
+rofi.ssh-client:           ssh
+rofi.ssh-command:          {terminal} -e {ssh-client} {host}
+rofi.padding:		400
+
+rofi.fullscreen:	true
+rofi.color-enabled: true
+
+!			main background, border, 	underline
+rofi.color-window: 	argb:e0000000, 	argb:aa000000, 	argb:aa000000 
+!rofi.color-window: 	argb:002f342f, 	argb:32002b36, 	argb:00000000 
+
+!			1st bg color	1st fg color	2nd bg color	selecct row bg	select row fg
+rofi.color-normal: 	argb:00000000,	argb:900000ff,	argb:00000000,	argb:00000000,	argb:ff0000ff 
+!rofi.color-normal: 	argb:002f342f, #f3f4ff, argb:002f342f, #657b83, #f3f4ff
+
+
+rofi.color-active: 	argb:00000000,	argb:900000ff,	argb:00000000,	argb:00000000,	argb:ff0000ff 
+!rofi.color-active: 	argb:ffff0000, 	argb:ffff0000, 	argb:ffff0000, 	argb:ffff0000,	argb:ffff0000
+!rofi.color-active: 	argb:002f342f, #f3f4ff, argb:002f342f, #657b83, #f3f4ff
+
+rofi.color-urgent: 	argb:00000000,	argb:900000ff,	argb:00000000,	argb:00000000,	argb:ff0000ff 
+!rofi.color-urgent: 	argb:ffff0000, 	argb:ffff0000, 	argb:ffff0000, 	argb:ffff0000,	argb:ffff0000
+!rofi.color-urgent: 	argb:002f342f, #dc322f, argb:002f342f, #657b83, #f3f4ff
+
+! rofi.color-window: #2f342f, #002b36, #000000 
+! rofi.color-normal: #2f342f, #f3f4ff, #2f342f, #657b83, #f3f4ff
+! rofi.color-active: #2f342f, #f3f4ff, #2f342f, #657b83, #f3f4ff
+! rofi.color-urgent: #2f342f, #dc322f, #2f342f, #657b83, #f3f4ff
+
+
+rofi.lines: 15
+
+
