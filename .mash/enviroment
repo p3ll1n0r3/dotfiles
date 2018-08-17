@@ -1,0 +1,9 @@
+# set our PATH
+
+PATH="${PATH}:${HOME}/.scripts"
+
+
+# set system variables
+
+export EDITOR=vim
+

@@ -1,0 +1,32 @@
+# developed function for usage
+
+help()
+{
+	# print all available functions
+
+	echo "x		- start x"
+	echo "musb	- mount usb disks to /run/media/$USER/"
+	echo "monitor	- attach external monitor in X with DVI and HDMI"
+}
+
+x()
+{
+	# todo : check if tty1 already is running X or not
+	exec startx
+}
+
+musb()
+{
+	# mount usb with udiskctl
+	# find usb block device, mount partition 
+	udisksctl mount -b /dev/sdb1
+	udisksctl mount -b /dev/sdc1
+}
+
+monitor()
+{
+	# extend display to monitor 2
+	# detect if monitor is mDP or HDMI or both
+	# xrandr
+}
+

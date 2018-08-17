@@ -15,7 +15,9 @@ gaps outer 10
 
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id compton -b
-exec --no-startup-id nitrogen --restore
+exec --no-startup-id wal -i ~/Downloads/ghost.jpg -a 85
+# exec --no-startup-id nitrogen --restore
+
 
 for_window [class="*"] border none
 for_window [class="^.*"] border none
