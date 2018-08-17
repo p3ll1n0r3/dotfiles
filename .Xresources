@@ -2,36 +2,50 @@
 ! theme colors
 ! ------------------------------------------------------------------------------
 ! special
-*.foreground: #ffd700
-*.background: #2b303b
-*.cursorColor: #c0c5ce
+*.foreground:   #c5c8c6
+*.background:   #1d1f21
+*.cursorColor:  #c5c8c6
 
-*.color0: #2b303b
-*.color1: #bf616a
-*.color2: #a3be8c
-*.color3: #ebcb8b
-*.color4: #8fa1b3
-*.color5: #b48ead
-*.color6: #96b5b4
-*.color7: #65737e
+! black
+*.color0:       #282a2e
+*.color8:       #373b41
 
-*.color8: #65737e
-*.color9: #bf616a
-*.color10: #a3be8c
-*.color11: #ebcb8b
-*.color12: #8fa1b3
-*.color13: #b48ead
-*.color14: #96b5b4
-*.color15: #F6F6F6
+! red
+*.color1:       #a54242
+*.color9:       #cc6666
+
+! green
+*.color2:       #8c9440
+*.color10:      #b5bd68
+
+! yellow
+*.color3:       #de935f
+*.color11:      #f0c674
+
+! blue
+*.color4:       #5f819d
+*.color12:      #81a2be
+
+! magenta
+*.color5:       #85678f
+*.color13:      #b294bb
+
+! cyan
+*.color6:       #5e8d87
+*.color14:      #8abeb7
+
+! white
+*.color7:       #707880
+*.color15:      #c5c8c6
 
 ! ------------------------------------------------------------------------------
 ! URxvt
 ! -----------------------------------------------------------------------------
-URxvt*termName:		rxvt-256color
-! URxvt*geometry:	240x84
+URxvt*termName:		rxvt-unicode-256color
+! URxvt*geometry:		240x84
 
-URxvt*saveline: 		300000
-URxvt.scrollBar:		false
+URxvt*saveline: 	300000
+URxvt.scrollBar:	false
 URxvt*scrollstyle:	plain
 URxvt.scrollBar_right:	false
 URxvt*scrollWithBuffer:	true
@@ -48,7 +62,7 @@ URxvt*borderColor:	[68]#131520
 !URxvt*borderLess:	true	
 !URxvt*letterSpace:	0
 
-URxvt.lineSpace:		1
+URxvt.lineSpace:	1
 URxvt.intensityStyles:	false
 URxvt*colorUL:		#1a8cff
 URxvt.url-launcher:	/usr/bin/firefox
@@ -67,7 +81,8 @@ URxvt*italicFont:	xft:monospace:italic:size=8
 URxvt*boldItalicFont:	xft:monospace:bold:italic:size=8
 URxvt*allow_bold: 	true
 
-URxvt.perl-ext-common:	default,tabbed,clipboard,url-select,keyboard-select
+URxvt.perl-ext-common:	default,clipboard,url-select,keyboard-select
+! URxvt.perl-ext-common:	default,tabbed,clipboard,url-select,keyboard-select
 
 URxvt.copyCommand:	xclip -i -selection clipboard
 URxvt.pasteCommand:	xclip -o -selection clipboard
@@ -135,5 +150,4 @@ rofi.color-urgent: 	argb:00000000,	argb:900000ff,	argb:00000000,	argb:00000000,	
 
 
 rofi.lines: 15
-
 
