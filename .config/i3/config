@@ -10,37 +10,37 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $term urxvt
+
 gaps inner 10
 gaps outer 10
 
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id compton -b
 exec --no-startup-id wal -i ~/Downloads/ghost.jpg -a 85
-# exec --no-startup-id nitrogen --restore
 
-
-for_window [class="*"] border none
+# for_window [class="*"] border none
 for_window [class="^.*"] border none
 
 for_window [class="feh"] floating enable ; resize set 1280 800 ; move position center
 
-#for_window [class="firefox"] move workspace 4
-
-
 # start a terminal
-bindsym $mod+Return exec urxvt 
+bindsym $mod+Return exec $term 
 
 # start rofi dmenu
 bindsym $mod+d exec rofi -show drun
 
 # screen locker
-bindsym $mod+l exec -no-startup-id /usr/bin/slock
+bindsym --release $mod+l exec slock
+#bindsym --release $mod+l exec ~/.config/i3/lock.sh 
 
 # All application launchers should key shortcuts with Modifier+Ctrl
-bindsym $mod+Ctrl+f workspace 4; exec firefox
+bindsym $mod+Ctrl+f exec firefox
 bindsym $mod+Ctrl+v workspace 5; exec virt-manager
-bindsym $mod+Ctrl+e exec ranger 
-bindsym $mod+Ctrl+r exec rtv
+bindsym $mod+Ctrl+n exec $term -e vim
+bindsym $mod+Ctrl+e exec $term -e ranger  
+bindsym $mod+Ctrl+r exec $term -e rtv
+bindsym $mod+Ctrl+l exec libreoffice
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -103,7 +103,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
