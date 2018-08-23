@@ -1,0 +1,9 @@
+#!/bin/bash
+while read -a X; do
+	if [ "${X[0]}" == "$IFACE:" ]; then
+		echo "interface OK = $IFACE"
+		printf "%'5dM" "$((${X[1]}/1024/1024))"
+	fi
+done < /proc/net/dev
+
+#unset X IFACE

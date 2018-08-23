@@ -1,4 +1,5 @@
 # define our aliases
 
 alias vi=vim
+alias ls=ll -la --color=aut=autoo
 

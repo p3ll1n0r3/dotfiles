@@ -4,16 +4,24 @@ help()
 {
 	# print all available functions
 
-	echo "x		- start x"
-	echo "musb	- mount usb disks to /run/media/$USER/"
-	echo "monitor	- attach external monitor in X with DVI and HDMI"
+	echo "x			- start x"
+	echo "musb		- mount usb disks to /run/media/$USER/"
+	echo "monitor		- attach external monitor in X with DVI and HDMI"
+	echo "getdefaultnic	- Get the most believed internface device that is default gateway"
+	echo "internetok	- check if we have an active internet connection"
 }
+
+# Start our X11 server unless we are not there yet
+# Todo : Check if TTY1 already has started X11
 
 x()
 {
 	# todo : check if tty1 already is running X or not
 	exec startx
 }
+
+# Mount our connected USB devices to /run/media/user
+# Todo : this should be automatically done with monitoring UDEV
 
 musb()
 {
@@ -23,10 +31,22 @@ musb()
 	udisksctl mount -b /dev/sdc1
 }
 
-monitor()
-{
-	# extend display to monitor 2
-	# detect if monitor is mDP or HDMI or both
-	# xrandr
+
+# Try to identify which is our default active interface
+
+getdefaultnic() {
+	for i in $(grep -r '.*' /sys/class/net/*/device/vendor | awk -F/ '{print $5}') ; do for j in $(ip r | grep "default.*dev" | awk '{print $5}') ; do if [[ "$i" == "$j" ]] ; then echo $j  ; fi ; done ; done
 }
 
+# Do we have active internet connection ?
+# Function returns : online - for test connection ok
+#                    offline - for test connection failed
+
+internetok() {
+wget -q --spider http://www.archlinux.org
+if [ $? -eq 0 ]; then
+	echo "online"
+else
+	echo "offline"
+fi
+}

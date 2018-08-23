@@ -81,13 +81,29 @@ URxvt*italicFont:	xft:monospace:italic:size=8
 URxvt*boldItalicFont:	xft:monospace:bold:italic:size=8
 URxvt*allow_bold: 	true
 
-URxvt.perl-ext-common:	default,clipboard,url-select,keyboard-select
+URxvt.perl-ext-common:	default,clipboard,url-select,keyboard-select,font-size,selection-to-clipboard
 ! URxvt.perl-ext-common:	default,tabbed,clipboard,url-select,keyboard-select
 
-URxvt.copyCommand:	xclip -i -selection clipboard
-URxvt.pasteCommand:	xclip -o -selection clipboard
-URxvt.keysym.m-c: 	perl:clipboard:copy
-URxvt.keysym.m-v: 	perl:clipboard:paste
+! URxvt.copyCommand:	xclip -i -selection clipboard
+! URxvt.pasteCommand:	xclip -o -selection clipboard
+
+! Unbind builtin copy/paste
+URxvt.C-M-c:		builtin-string:
+URxvt.C-M-v.		builtin-string:
+
+URxvt.keysym.C-Ins:	eval:selection_to_clipboard
+!URxvt.keysym.C-Ins:	clipboard:copy
+
+! URxvt.keysym.C-Ins:	clipboard:copy
+! URxvt.keysym.S-Ins:	eval:selectio_to_clipboard
+URxvt.keysym.S-Ins:	clipboard:paste
+
+
+! URxvt.keysym.m-c: 	clipboard:copy
+! URxvt.keysym.m-v: 	clipboard:paste
+URxvt.keysym.C-Up: 	font-size:increase
+URxvt.keysym.C-Down: 	font-size:decrease
+
 
 URxvt.keysym.Home:	\033[1~
 URxvt.keysym.End:	\033[4~

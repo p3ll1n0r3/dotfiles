@@ -1,0 +1,19 @@
+#!/bin/bash
+# Try to identify which is our default active interface
+
+getdefaultnic() {
+	for i in $(grep -r '.*' /sys/class/net/*/device/vendor | awk -F/ '{print $5}') ; do for j in $(ip r | grep "default.*dev" | awk '{print $5}') ; do if [[ "$i" == "$j" ]] ; then echo $j  ; fi ; done ; done
+}
+
+# Do we have active internet connection ?
+# Function returns : online - for test connection ok
+#                    offline - for test connection failed
+
+internetok() {
+wget -q --spider http://www.archlinux.org
+if [ $? -eq 0 ]; then
+	echo "online"
+else
+	echo "offline"
+fi
+}
