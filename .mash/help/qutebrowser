@@ -1,0 +1,27 @@
+
+		QUTEBROWSER	
+		-----------------------------------------------------------------------------------------
+		h/left			scroll left
+		k/up 			scroll up
+		j/down 			scroll down
+		l/right			scroll left
+
+		f			hints links
+
+		o			open url
+		O			open url in new tab
+
+		gt			goto tab
+		gg			goto to top of page
+		G			goto bottom of page	
+		th			tab history back
+		tl			tab history forward
+		yy			copy/yank url
+		yY			copy/yank url to clipboard
+		pp			paste url
+		alt+[0-9]		switch to tab [0-9]
+
+		d			close tab
+		q			quit qutebrowser
+
+

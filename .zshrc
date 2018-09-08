@@ -1,5 +1,5 @@
-# Created by newuser for 5.5.1
-# key bindings
+source .profile
+
 bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 bindkey "\e[5~" beginning-of-history
@@ -18,4 +18,3 @@ bindkey "\eOH" beginning-of-line
 bindkey "\eOF" end-of-line
 bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
-

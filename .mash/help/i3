@@ -1,0 +1,34 @@
+
+		i3	
+		-----------------------------------------------------------------------------------------
+		Windows key = Modifier
+
+		W+Return		Spawn Terminal
+		W+l			Lock Screen
+		W+b			Start world wide web Qutebrowser
+		W+q			Kill Window
+		W+d			Spawn Rofi
+		W+f 			Toggle focus window to Full  screen
+		W+Arrows		Move focus Window
+		W+[0-9]			Move to Workspace X
+		W+Shift+[0-9]		Move focused Windows to Workspace X
+		W+Shift+Arrows		Move around focused Window in Workspace
+
+		W+h			Horisontal split for next window
+		W+v			Vertical split for next window
+
+		W+w			Window stack mode horisontal
+		W+s			Window stack mode vertical
+		W+e			Window normal mode
+
+		W+Ctrl+f		Firefox
+		W+Ctrl+e		Ranger File Explorer
+		W+Ctrl+n		Vim Notepad
+		W+Ctrl+r		Reddit Terminal Viewer
+		W+Ctrl+v		Virtual Manager	
+		W+Ctrl+l		LibreOffice
+
+
+
+
+

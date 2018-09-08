@@ -1,0 +1,29 @@
+
+		VIM
+		-----------------------------------------------------------------------------------------
+		h/left			scroll left
+		k/up 			scroll up
+		j/down 			scroll down
+		l/right			scroll left
+		v			visual selection	
+		yy 			yank/copy line to buffer
+		Y			yank line
+		dd 			cut to bufer
+		D			delete content of current lin
+		p 			paste from buffer
+		/ 			search for string
+		n 			search next string		
+		:w 			save file
+		:wq 			save file and quit
+		ZZ 			save and quit
+		gg 			goto first row
+		G			goto last line
+		:sort			sort selection
+		:read			insert file or result from shell command (:read !ls -la)
+		vim -p f1.txt f2.txt	open vim with multiple files in tabs
+		:tabnew			create new tab
+		tabfind ~/.Xresources 	open file in new tab	
+		gt 			goto next tab 
+		gT 			goto previous tab
+
+

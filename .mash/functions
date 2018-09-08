@@ -1,52 +1,65 @@
-# developed function for usage
-
 help()
 {
-	# print all available functions
-
-	echo "x			- start x"
-	echo "musb		- mount usb disks to /run/media/$USER/"
-	echo "monitor		- attach external monitor in X with DVI and HDMI"
-	echo "getdefaultnic	- Get the most believed internface device that is default gateway"
-	echo "internetok	- check if we have an active internet connection"
+	echo "		vi		alias for vim"
+	echo "		update		run system pacman upgrade"
 }
 
-# Start our X11 server unless we are not there yet
-# Todo : Check if TTY1 already has started X11
-
-x()
+gitdot()
 {
-	# todo : check if tty1 already is running X or not
-	exec startx
-}
+	# TODO : start Git Clone with stored password
+	
+	# Files in array to copy to Github	
+	array=( 
+		~/colors.jpg
+		~/.Xresources
+		~/.vimrc
+		~/.xinitrc
+		~/.zshrc
+		~/.profile
+		~/.bashrc
+		~/.gtkrc-2.0
+		~/.config/compton.conf
+		~/.config/i3/config
+		~/.config/dunst/dunstrc
+		~/.config/gtk-3.0/settings.ini
+		~/.config/nitrogen/bg-saved.cfg
+		~/.config/nitrogen/nitrogen.cfg
+		~/.config/ranger/rc.conf
+		~/.config/polybar/config
+		~/.mash/functions
+		~/.mash/aliases
+		~/.mash/help/git
+		~/.mash/help/i3
+		~/.mash/help/qutebrowser
+		~/.mash/help/ranger
+		~/.mash/help/vim
+		~/.newsboat/config
+		~/.newsboat/urls
+		~/.urxvt/ext/font-size
+		)
 
-# Mount our connected USB devices to /run/media/user
-# Todo : this should be automatically done with monitoring UDEV
+	# Our Git folder
+	GITFOLDER="${HOME}/github/dotfiles"
 
-musb()
-{
-	# mount usb with udiskctl
-	# find usb block device, mount partition 
-	udisksctl mount -b /dev/sdb1
-	udisksctl mount -b /dev/sdc1
-}
+#	echo "number in array:  ${#array[*]}"
 
+	for ITEM in ${array[*]}
+	do
+		if [[ -f ${ITEM} ]] then ;
+			FILE=$(basename "${ITEM}")
+			DIR=$(dirname "${ITEM}")
 
-# Try to identify which is our default active interface
+			DIR=$(echo ${DIR} | cut -d'/' -f4-)
+			DESTINATION=${GITFOLDER}/${DIR}
 
-getdefaultnic() {
-	for i in $(grep -r '.*' /sys/class/net/*/device/vendor | awk -F/ '{print $5}') ; do for j in $(ip r | grep "default.*dev" | awk '{print $5}') ; do if [[ "$i" == "$j" ]] ; then echo $j  ; fi ; done ; done
-}
+# 			echo "$ITEM  :  $DESTINATION  :  $FILE"
+#			echo "Folder to create ${DESTINATION}"
+			
+			if [[ ! -d ${DESTINATION} ]] then ; mkdir -p ${DESTINATION} ; fi
+			cp ${ITEM} ${DESTINATION}
+		else
+			echo  "Failed to find : ${ITEM}"
+		fi
+	done
 
-# Do we have active internet connection ?
-# Function returns : online - for test connection ok
-#                    offline - for test connection failed
-
-internetok() {
-wget -q --spider http://www.archlinux.org
-if [ $? -eq 0 ]; then
-	echo "online"
-else
-	echo "offline"
-fi
 }

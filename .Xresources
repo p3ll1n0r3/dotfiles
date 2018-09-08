@@ -1,42 +1,39 @@
-! ------------------------------------------------------------------------------
-! theme colors
-! ------------------------------------------------------------------------------
 ! special
-*.foreground:   #c5c8c6
-*.background:   #1d1f21
-*.cursorColor:  #c5c8c6
+*.foreground:   #cfcd95
+*.background:   #161616
+*.cursorColor:  #cfcd95
 
 ! black
-*.color0:       #282a2e
-*.color8:       #373b41
+*.color0:       #151515
+*.color8:       #696969
 
 ! red
-*.color1:       #a54242
-*.color9:       #cc6666
+*.color1:       #ff8eaf
+*.color9:       #ed4c7a
 
 ! green
-*.color2:       #8c9440
-*.color10:      #b5bd68
+*.color2:       #a6e25f
+*.color10:      #a6e179
 
 ! yellow
-*.color3:       #de935f
-*.color11:      #f0c674
+*.color3:       #f8e578
+*.color11:      #ffdf6b
 
 ! blue
-*.color4:       #5f819d
-*.color12:      #81a2be
-
+*.color4:       #a6e2f0
+*.color12:      #79d2ff
+ 
 ! magenta
-*.color5:       #85678f
-*.color13:      #b294bb
+*.color5:       #e85b92
+*.color13:      #bb5d79
 
 ! cyan
-*.color6:       #5e8d87
-*.color14:      #8abeb7
+*.color6:       #5f868f
+*.color14:      #87a8af
 
 ! white
-*.color7:       #707880
-*.color15:      #c5c8c6
+*.color7:       #d5f1f2
+*.color15:      #e2f1f6
 
 ! ------------------------------------------------------------------------------
 ! URxvt
@@ -57,7 +54,7 @@ URxvt*cursorUnderline:	true
 URxvt*cursorColor:	#F1F014
 
 URxvt*pointerColor2:	#002B36
-URxvt*fading:		20
+URxvt*fading:		35
 URxvt*borderColor:	[68]#131520
 !URxvt*borderLess:	true	
 !URxvt*letterSpace:	0
@@ -69,7 +66,8 @@ URxvt.url-launcher:	/usr/bin/firefox
 URxvt*iso14755:		false
 
 URxvt*depth:		32
-URxvt*background:	[90]#2b303b
+! URxvt*background:	[90]#2b303b
+URxvt*background:	[90]#000022
 URxvt*scrollBar_right:	false
 URxvt*internalBorder: 	0
 URxvt*externalBorder: 	0
@@ -84,18 +82,18 @@ URxvt*allow_bold: 	true
 URxvt.perl-ext-common:	default,clipboard,url-select,keyboard-select,font-size,selection-to-clipboard
 ! URxvt.perl-ext-common:	default,tabbed,clipboard,url-select,keyboard-select
 
-! URxvt.copyCommand:	xclip -i -selection clipboard
+URxvt.copyCommand:	xclip -i -selection clipboard
 ! URxvt.pasteCommand:	xclip -o -selection clipboard
 
 ! Unbind builtin copy/paste
 URxvt.C-M-c:		builtin-string:
-URxvt.C-M-v.		builtin-string:
+URxvt.C-M-v:		builtin-string:
 
-URxvt.keysym.C-Ins:	eval:selection_to_clipboard
+URxvt.keysym.C-Ins:	eval:selection_to_clipboard, clipboard:copy
 !URxvt.keysym.C-Ins:	clipboard:copy
 
 ! URxvt.keysym.C-Ins:	clipboard:copy
-! URxvt.keysym.S-Ins:	eval:selectio_to_clipboard
+! URxvt.keysym.S-Ins:	eval:selection_to_clipboard
 URxvt.keysym.S-Ins:	clipboard:paste
 
 

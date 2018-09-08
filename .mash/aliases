@@ -1,5 +1,5 @@
-# define our aliases
+# list all aliases here
 
-alias vi=vim
-alias ls=ll -la --color=aut=autoo
+alias update="pacman -Syu"
+alias vi="vim"
 

@@ -1,0 +1,15 @@
+
+	        RANGER	
+		-----------------------------------------------------------------------------------------
+		Ctrl+n			New tab
+		alt+2			second tab
+		tab			switch tabs
+		zh			show hidden
+		space			select file(s)
+		dd			cut file(s)
+		pp			paste file(s) / move file(s)
+		gh			go home
+		gm			go to media /run/media/USERID/mount disks with UDISKS2
+		cw			rename
+		F7			mkdir	
+

@@ -1,0 +1,107 @@
+[bar/top]
+enable-ipc = true
+monitor = DVI-I-1 
+width = 100%
+height = 14 
+bottom = false
+padding-left = 0
+padding-right = 0
+offset-x = 10
+offset-y = 20
+;border-size = 10
+border-top-size = 5 
+border-left-size = 15
+border-bottom-size = -3 
+
+background = #00000000
+foreground = #D8DEE9 
+
+font-0 = monospace:style=Regular:size=10;0
+;font-0 = Robotomono NF:style=Bold:fontformat=truetype:size=10;0
+font-1 = Font Awesome 5 Free:fontformat=truetype:size=12;3
+font-2 = Font Awesome 5 Free:fontformat=truetype:style=Solid:size=12;1
+font-3 = Font Awesome 5 Brands:fontformat=truetype:size=12;1
+font-4 = Noto Sans Symbols2:fontformat=truetype:size=12;3
+:font-0 = Noto Sans:style=Regular:size=14;1
+;font-2 = monospace:style=Regular:size=8;1
+
+wm-name = topbar
+
+modules-left = time 
+modules-center = window
+modules-right = pulseaudio 
+
+;tray-position = right
+;tray-detached = false
+;tray-maxsize = 16
+;tray-transparent = True
+;tray-background = ${root.background}
+;tray-background = #000000
+
+;tray-offset-x = 0
+;tray-offset-y = 0
+;tray-padding = 0
+;tray-scale = 1.0
+
+;
+; Define modules used in bars
+;
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+;sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = false
+
+; Interval for volume increase/decrease (in percent points) (unreleased)
+; Default: 5
+interval = 5
+
+format-volume = <ramp-volume> <label-volume>
+
+label-active-font = 0 
+label-muted = "🔇 mute"
+label-volume = %percentage:4%%
+label-muted-foreground = #bf616a
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+
+[module/time]
+type = custom/script
+exec = echo `date +"%H:%M:%S  %d-%m-%Y"`
+;format-padding = 4
+interval = 1
+label-active-font = 0 
+
+[module/firefox]
+type = custom/script
+exec = firefox 
+label-active-font = 0
+label = Firefox
+click-left = firefox
+
+[module/myspacer]
+type = custom/text
+content = "  BAT:"
+label-active-font = 0 
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = AC
+poll-interval = 10
+label-active-font = 0
+
+[module/window]
+type = internal/xwindow
+label-active-font = 0

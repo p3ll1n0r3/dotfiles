@@ -17,23 +17,28 @@ gaps outer 10
 
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id compton -b
-exec --no-startup-id wal -i ~/Downloads/ghost.jpg -a 85
+# exec --no-startup-id wal -i ~/Downloads/colors.jpg -a 85
+exec --no-startup-id polybar top
+exec --no-startup-id nitrogen --restore
 exec --no-startup-id dunst 
+exec --no-startup-id udiskie -F
+exec --no-startup-id xset r rate 250 50
 
 # for_window [class="*"] border none
 for_window [class="^.*"] border none
 
-for_window [class="feh"] floating enable ; resize set 1280 800 ; move position center
+# for_window [class="feh"] floating enable ; resize set 1280 800 ; move position center
 
+# The most important applications has keyboard shortcut with Modifier + key
 # start a terminal
 bindsym $mod+Return exec $term 
-
 # start rofi dmenu
 bindsym $mod+d exec rofi -show drun
-
 # screen locker
 bindsym --release $mod+l exec slock
-#bindsym --release $mod+l exec ~/.config/i3/lock.sh 
+# web browser
+bindsym $mod+b exec qutebrowser
+
 
 # All application launchers should key shortcuts with Modifier+Ctrl
 bindsym $mod+Ctrl+f exec firefox
@@ -98,10 +103,11 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+# bindsym $mod+Shift+space floating toggle
+bindsym $mod+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 # bindsym $mod+a focus parent

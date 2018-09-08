@@ -1,0 +1,10 @@
+
+		GIT	
+		-----------------------------------------------------------------------------------------
+		git clone url.git		Clone a git project
+		git pull			update current directory project
+		git add -A			add all files to the project
+		git commit -m "updated this"	Commit with description
+		git push			upload changes in project to portal
+
+
