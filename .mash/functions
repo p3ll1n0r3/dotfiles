@@ -63,3 +63,8 @@ gitdot()
 	done
 
 }
+
+pwd()
+{
+	openssl rand -base64 32 | tr -dc A-Z-a-z-2-9 | fold -w16 | head -n 1 | sed 's/.\{4\}/&-/g' |fold -w19 | head -n 1
+}
