@@ -1,5 +1,7 @@
 syntax on
 
+let &colorcolumn=join(range(81,9999),",") 
+
 "set showtabline=2
 "set laststatus=2
 set number
@@ -17,6 +19,7 @@ hi Comment cterm=NONE ctermfg=4 ctermbg=NONE
 hi MatchParen cterm=NONE ctermfg=1 ctermbg=NONE
 hi LineNr ctermfg=6
 hi cursorline cterm=NONE ctermfg=15 ctermbg=0
+hi colorcolumn ctermbg=NONE ctermfg=1
 
 "hi Constant cterm=NONE ctermfg=0 ctermbg=4 
 "hi Special  cterm=NONE ctermfg=3 ctermbg=NONE
