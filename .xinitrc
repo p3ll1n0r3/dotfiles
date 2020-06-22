@@ -1,13 +1,13 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
-if [ -d /etc/X11/xinit/xinitrc.d ];then
-	for f in /etc/X11/xinit/xinitrc.d/* ; do
-		[ -x "$f" ] && . "$f"
-	done
-	unset f
-fi
+# merge our X configuration
+[[ -f ~/.Xresources ]] && xrdb -I$HOME ~/.Xresources
 
-xrdb -merge ~/.Xresources
-xset r rate 200 50
+# start xprofile programs
+[ -f ~/.xprofile ] && . ~/.xprofile
 
-exec i3
+# export DBUS
+export $(dbus-launch)
+
+# start windows manager
+exec $VMMANAGER
