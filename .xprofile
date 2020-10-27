@@ -27,9 +27,6 @@ udiskie &
 # If running Power connected and chargin set full backlight
 [[ $(acpi -a | awk -F ':' '{ print $2 }') == " off-line" ]] && xbacklight -set 85 || xbacklight -set 100
 
-# if running dwm window manager , run the dwmblocks bar
-# [[ "$VMMANAGER"=="dwm" ]] && dwmblocks &
-
 # Generate colors based on background image
 wal -i ~/.config/backgrounds/wall.png &
 
