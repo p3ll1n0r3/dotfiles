@@ -75,7 +75,8 @@ python-pip
 python-virtualenv 
 qemu 
 ranger 
-rtv 
+rtv
+screen
 scrot 
 simplescreenrecorder 
 slock 
