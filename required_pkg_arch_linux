@@ -75,7 +75,6 @@ python-pip
 python-virtualenv 
 qemu 
 ranger 
-rtv
 screen
 scrot 
 simplescreenrecorder 
@@ -85,7 +84,8 @@ sshfs
 sudo 
 sxiv 
 sysstat 
-systemd-swap 
+systemd-swap
+tcpdump
 terminator 
 tmux 
 traceroute 
