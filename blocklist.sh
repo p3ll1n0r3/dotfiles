@@ -10,6 +10,8 @@
 countries="
 ru
 cn
+ua
+ro
 "
 
 firewall-cmd --permanent --direct --remove-rules ipv4 filter INPUT
