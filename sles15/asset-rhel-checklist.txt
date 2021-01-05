@@ -1,0 +1,387 @@
+
+VG = root
+Partition as large as Possible
+
+/		8192		root	root
+/home		4096		root	home
+/var		8192		root	var
+/tmp		2048		root	tmp
+/var/log	4096		root	log
+/var/log/audit	1024		root	audit
+/boot		----		----	-----
+/boot/efi	where applicble physical boxes
+
+For applications
+create applicable filesystem or even own VG
+i.e
+/opt/mysql	8192		db	mysql
+
+
+
+checklist - 							hostname
+---------------------------------------------------------------------------------------------------------------
+ 1) Installation av RHEL 7.4 iso				- 
+	POD3 can use ISOSTORE image
+
+ 2) hostname - hostnamectl set-hostname myserver		- 
+	$ hostnamectl set-hostnam {MYSERVERFQDN}		
+	$ exit
+	relogin to set hostname
+
+ 3) local /repo temorary or permanent if needed			- 
+
+ 4) network bonding-BOND0/VLAN if applicable			- 
+	$ nmtui
+	a) erase all current interface configurations
+	b) create Bond : 
+		"bond0" with 2 physical interfaces ex. ens1f0 and ens1f1
+		ipv4 - disabled
+		primary interface - ens1f0
+		Type : Active Backup
+	c) create 2 VLAN
+		prod interface , set static ip, gw, mask + dns servers
+		backup interface , set dhcp , (ignore as default route)
+
+	CREATE TEAM ?
+		ACTIVE/BACKUP
+		ROUND ROBIN?
+		TIME?
+
+ 5) network prod						- 
+
+ 6) network backup 						- 
+
+ 7) backup nic - static route for Satellite/backupserver	- 
+	set static route if needed with NMTUI
+POD3	VLAN 3880	213.153.99.0/24		via	10.220.136.1	dev ENS224 (or similar)
+			213.153.122.240/28	via	10.220.136.1	dev ENS224 (or similar)
+POD1	VLAN 4 ?	213.153.99.0/24		via	10.220.129.1	dev ENS224 (or similar)
+			213.153.122.240/28	via	10.220.136.1	dev ENS224 (or similar)
+
+	$ telnet 213.153.99.187 1500		- TSM server - SKV
+	$ telnet 213.153.			- TSM server - BAE
+	$ telnet 213.153.99.187 1556		- NetBackup server (port 1556)
+
+ 8) check /etc/hosts -	add local long and short hostname	- 
+	$ cat /etc/hosts
+    Add
+	213.153.122.230 rhn-restricted.service.dcinf.se rhn-restricted
+
+ 9) Get files from RHN-RESTRICTED				- 
+	$ curl -Ok rhn-restricted/pub/rhel-latest.sh
+	$ curl -Ok rhn-restricted/pub/katello-ca-consumer-latest.noarch.rpm
+
+10) satellite registration					- 
+	$ rpm -ivh katello-ca-consumer-latest.noarch.rpm
+VMs     $ subscription-manager register --org="Default_Organization" --activationkey="rhel-server-7v2" --force
+
+Fysisk eller d�r det bara �r enstaka VM p� en ESX host
+	$ subscription-manager register --org="Default_Organization" --activationkey="rhel-server-7-single" --force
+
+	$ subscription-manager repos --enable=\*
+
+11) Yum update 							- 
+	$ yum -y update
+
+12) Reboot							- 
+	$ reboot
+
+13) security script - run latest hardening script		- 
+	$ chmod +x rhel-latest.sh
+	$ ./rhel-latest.sh
+
+14) Reboot							- 
+
+14) create (if needed) Oracle group - addgroup oracleadmins	- 
+
+15) IBM user -	add Linux team members	GECOS standard		- 
+	$ adduser -c "Michael Hellden/IBM" -m e603500
+	$ usermod -aG ibmadmins e603500
+	$ passwd e603500
+
+16) test SUDO with normal userid				- 
+	$ su - e603500
+	$ sudo -i
+
+17) SAN disks -Physical server. These are not 100% working instructions	- 
+	$ modprobe dm-multipath
+	$ systemctl restart multipathd
+	$ multipath --enable
+	$ multpath -v2
+	$ mpathconf -ll
+	$ chkconfig multipathd on
+	Create PV from /dev/mpatha then VG and LV
+
+18) check dns - install bind-utils, test "dig"			- 
+	$ dig
+
+19) check ntp - check NTP sync (chronyc sourcestats/tracking)	- 
+	$ vi /etc/chrony.conf
+	remove default SERVER list
+	example (for SKV) add : server 213.153.104.1 iburst
+
+20) Filesystem /u01 (if it is requested from database team)	- 
+21) Filesystem /u02  (if it is requested from database team)	- 
+22) monitoring - Nagios + extra					- 
+
+COMPILE FROM BEGINNING
+
+	$ cd ~
+	$ adduser -c "Nagios Monitoring/IBM" -m nagios
+	$ passwd nagios
+	$ wget http://rhn-restricted.service.dcinf.se/pub/nagios-plugins-2.1.4.tar.gz
+	$ wget http://rhn-restricted.service.dcinf.se/pub/nagios-extra.tar
+	$ tar -xvf nagios-plugins-2.1.4.tar.gz
+	$ cd nagios-plugins-2.1.4
+	$ yum install -y gcc glibc-devel glibc-headers glibc glibc-common
+	$ umask 022
+	$ ./configure --with-nagios-user=nagios --with-nagios-group=nagios --with-openssl
+	$ make all
+	$ make install
+	$ cd ..
+	$ rm -rf nagios-plugins-2.1.4
+	$ cd ~
+	$ mkdir extra && cd extra && tar -xvf ../nagios-extra.tar
+	$ cp * /usr/local/nagios/libexec/
+	$ chown nagios:nagios /usr/local/nagios/libexec/*
+	$ chmod 755 /usr/local/nagios/libexec/*
+	$ cd .. && rm -rf extra nagios-extra.tar
+
+PREPACKAGE Files + AUTHORIZED KEYS - not finished package yet
+	Will create package from : rhn-restricted (RHEL7) and from ix1-jmp03 (RHEL6)
+	
+	$ cd ~
+	$ passwd nagios (set random password)
+RHEL 7	$ wget http://rhn-restricted.service.dcinf.se/pub/nagios-rhel7.tar
+RHEL 6	$ wget http://rhn-restricted.service.dcinf.se/pub/nagios-prepackage-rhel6.gz
+	$ tar -C / -xvf nagios-rhel7.tar
+	$ chmod 755 /usr/local/nagios/libexec/*
+	$ chown nagios:nagios /home/nagios/.ssh
+Fysisk	$ rpm -ivh http://rhn-restricted.service.dcinf.se/pub/perl-IPC-Run-0.92-2.el7.noarch.rpm http://rhn-restricted.service.dcinf.se/pub/perl-IO-Tty-1.10-11.el7.x86_64.rpm
+	$ rm -rf ~/nagios-rhel7.tar
+
+
+23) backup - Backup install client + autostart		- 
+
+    dsm.sys - template
+---    
+ServerName         SERVER8
+NodeName           HOSTNAME_BA
+COMMmethod         TCPip
+TCPPort            1500
+
+TCPServeraddress   213.153.99.187
+SCHEDMODE          Polling
+Passwordaccess     Generate
+Schedlogname       /var/log/tsm/dsmsched.log
+Errorlogname       /var/log/tsm/dsmerror.log
+
+
+Errorlogret        10,d
+Schedlogret        10,d
+
+GUITREEViewafterbackup  Yes
+
+   LARGECOMmbuffers   YES
+*  TCPWindowsize      630
+   TCPBuffsize        512
+   TXNBytelimit       2097152
+*   DIRMc              MCDIR
+   COMPression        No
+*  RESOURceutilization x
+
+*  PRESchedulecmd   xxxxxx
+*  POSTSchedulecmd  xxxxxx
+
+#include.encrypt "/.../*"
+----  
+
+
+    a) TSM
+        From tools storage download tsm.tar package including dsm.sys template
+
+	$ cd ~
+	$ wget rhn-restricted.service.dcinf.se/pub/tsm81.iso
+	$ mount tsm81.iso /mnt
+	$ cd /mnt/8.1
+	$ rpm -ivh TIVsm-BA.x86_64.rpm TIVsm-API64.x86_64 gsk*.rpm
+	$ cp dsm.sys /opt/tivoli/tsm/client/ba/bin
+not SKV	$ sed -i '/^#include/ d' dsm.sys
+
+
+	FOR REDHAT 6 servers - not complete instructions
+	
+	$ cp tsm.init.script /etc/init.d/tsm
+	$ chkconfig tsm on
+
+
+	FOR REDHAT 7 servers
+
+	$ cp /opt/tivoli/tsm/client/ba/bin/dsmcad.service /etc/systemd/system/ 
+	$ sed -i 's/^Environment.*/Environment=\"DSM_LOG=\/var\/log\/tsm\"/g' /etc/systemd/system/dsmcad.service
+	$ sed -i '/TCPServeraddress.*/aMANAGEDSERVICES    SCHEDULE' /opt/tivoli/tsm/client/ba/bin/dsm.sys
+	$ chmod 444 /etc/systemd/system/dsmcad.service
+	$ systemctl daemon-reload
+	$ systemctl enable dsmcad.service
+	$ systemctl start dsmcad.service
+	
+	$ cd ~
+	$ umount /mnt
+	$ rm -rf ~/tsm81.iso
+
+	Log are /var/log/tsm/dsminstr.log & /var/log/tsm/dsmschedule.log & dsmerror.log
+	
+    b) Netbackup
+       ......
+
+24) backup - TSM install Oracle komponent + JDK			- 
+
+25) backup - konfig dsm.sys or bp.conf				- 
+	$ vi /opt/tivoli/tsm/client/ba/bin/dsm.sys		(modify SERVERIP and NODENAME and ENCRYPTION)
+	
+	copy dsm.opt.sample to dsm.opt and modify to same SERVERNAME
+
+26) backup - setup dmsc node password (start dsmc)		- 
+	$ dsmc
+	accept NODENAME and use provided password from Backup
+	TSM default = 2PjDZTWVTQ3fDfpceh3n
+
+RHEL6	$ service tsm start
+RHEL7	$ systemctl restart dsmcad
+
+	$ cat /var/log/tsm/dsmschedule.log			(check if scheduling from DSMC server works)
+								(could be delayed on RHEL7 with dsmcad process)
+								(check process running dsmcad )
+	
+27) backup - SKV setup krypteringsnyckel			- 
+
+28) backup - test backup and restore /etc/hosts to /tmp		- 
+	$ dsmc inc /etc/hosts
+
+	Remove or copy away /etc/adsm/TSM.PWD and set new passwd with restor command
+	$ dsmc restore /etc/hosts /tmp/hosts
+
+29) backup - lagra TSM l�senord p� r�tt SKV server		- 
+
+30) Firewalls - SSH fr�n jumpserver (ex. SKVJUMP2)		- 
+
+31) OVM - register /etc/hosts - ovmadm01-p0			- 
+
+32) OVM - DHCP01 reservation					- 
+
+33) OVM - TOWER job - Netbackup Add DNS				- 
+
+34) SKV - OSSEC							- 
+	$ yum install perl-Digest-MD5				 
+	$ umask 022
+	$ wget ossec-hids-agent-siprodskv-2.8.3-8.el7.centos.x86_64.rpm
+	$ /var/ossec/bin/agent-auth -m 213.153.122.55 (SKV 213.153.122.55 , SL 194.132.190.135)
+	$ vi /var/ossec/etc/ossec.conf          - Modify correct IP (SKV 213.153.122.55 , SL 194.132.190.135)
+	$ chkconfig ossec-hids-agent on
+	$ systemctl restart ossec-hids-agent
+
+35) DNS - add in correct DNS server				- 
+
+36) vmware client tools installed				- 
+
+37) Snow client 						- 
+
+38) cmdb - uppdatera CMDB					- 
+
+39) root passwd 						- 
+	$ passwd			(Kfds-VwLg-McXX)
+					(GwsC-MkGH-8DDa)
+
+40) Lagra root l�senord i ServiceLAN - PasswordMNanager		- 
+	https://servicelan.edb.se
+
+41) IFS claim / IBM claim					- 
+
+-----------------------------------------------------------------------------------------------------------------
+
+Satellite Registration:
+$ curl -Ok http://rhn-restricted.service.dcinf.se/pub/satellite-registration.sh
+$ chmod +x satellite-registration.sh
+$ ./satellite-registration
+$ yum update
+
+Manuell registration
+$ subscription-manager register --org=Default_Organization --activationkey=rhel-server-7v2 --force
+or
+$ subscription-manager register --org=Default_Organization --activationkey=rhel-server-6 --force
+
+$ subscription-manager repos --enable=\*
+
+Get latest security script
+$ curl -Ok http://rhn-restricted.service.dcinf.se/pub/rhel-latest.sh
+$ ./rhel-latest
+
+Setup users before reboot, otherwise root is forced to change password for first logon
+
+Get latest tools set ISO from RHN-RESTRICTED
+$ wget http://rhn-restricted.service.dcinf.se/pub/tools-latest.iso
+$ mount tools-latest.iso /mnt
+
+FreeIPMI extras :
+$ rpm -ivh http://rhn-restricted.service.dcinf.se/pub/perl-IPC-Run-0.92-2.el7.noarch.rpm http://rhn-restricted.service.dcinf.se/pub/perl-IO-Tty-1.10-11.el7.x86_64.rpm
+
+Static route if needed , configure with NMTUI :
+213.153.99.187/32	10.220.132.1
+
+Telnet test backup server
+$ telnet 213.153.99.187 1500		- TSM server (port 1500 or 1501)
+$ telnet 213.153.99.187 1556		- NetBackup server (port 1556)
+
+Konfig Backup
+/opt/tivoli/tsm/client/ba/bin
+/usr/open/netbackup/bp.conf
+  $ sed -i "/^\(CLIENT_NAME =\).*/\1 $HOSTNAME/" /usr/openv/netbackup/bp.conf
+
+TSM backup test
+$ dsmc inc /etc/hosts
+$ dsmc restore /etc/hosts /tmp/hosts
+
+Backup autostart
+$ chkconfig tsm on			- TSM
+$ chkconfig netbackup on		- Netbackup
+
+SKV-OSSEC client
+$ wget ossec-hids-agent-siprodskv-2.8.3-8.el7.centos.x86_64.rpm
+$ umask 022
+$ /var/ossec/bin/agent-auth -m 213.153.122.55
+$ vi /var/ossec/etc/ossec.conf          - Modify correct IP
+$ chkconfig ossec-hids-agent on
+$ systemctl restart ossec-hids-agent
+
+
+/u01 & /u02 filsystem f�r oracle
+================================
+hitta r�tt diskar med fdisk -l
+Kolla om diskarna �r PV redan och nollst�ll partitionstabell om det beh�vs p�
+respektive disk.
+Skapa PVs, oracle VG och u01 + u02 LVs
+Skapa filsystem och montera. L�gg till i fstab.
+OBS - viss pseudokod med exempeldevices nedan.
+
+$ fdisk -l |grep mapper
+$ pvs
+$ for each disk ; do dd if=/dev/zero of=/dev/mapper/360a9800041764656333f43594d69676c bs=512 count=1 ; done
+$ pvcreate /dev/mapper/360a9800041764656333f43594d696768 \
+           /dev/mapper/360a9800041764656333f43594d69676a \
+           /dev/mapper/360a9800041764656333f43594d69676c
+$ vgcreate oracle /dev/mapper/360a9800041764656333f43594d696768 \
+                  /dev/mapper/360a9800041764656333f43594d69676a \
+                  /dev/mapper/360a9800041764656333f43594d69676c
+$ lvcreate -L 80G -n u01 root
+$ lvcreate -l 100%FREE -n u02 oracle
+$ cat <<EOF >>/etc/fstab
+/dev/mapper/root-u01    /u01                    xfs     defaults
+/dev/mapper/oracle-u02  /u02                    xfs     defaults
+EOF
+$ mkfs.xfs /dev/mapper/root-u01 
+$ mkfs.xfs /dev/mapper/oracle-u02 
+$ mkdir /u01 /u02
+$ mount /u01
+$ mount /u02
+
+
