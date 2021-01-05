@@ -1,0 +1,106 @@
+
+Installation
+---------------------------
+Boot from SLES 15.2 installation medium
+
+Extension and Module Selection : 
+- Basesystem Module
+- Server Application Module
+
+System Role:
+- Minimal
+
+Partitioning:
+
+Partition (100GB)
+
+1           256 MB      Bios Boot Partition     (Raw unformatted)
+2           100%        Linux Partition         (Raw unformatted)
+
+
+LVM - Volume Group 
+
+VG = rootvg
+PE = 8 MiB
+PV member = Linux Partition
+
+
+LVM - Logical Volumes for VG "rootvg"
+
+Mountpoint  Size GiB    LV name
+
+/home		8 GiB		home            btrfs       Data and ISV Applications
+/tmp        4 GiB       tmp             XFS         Data and ISV Applications
+swap        up to 16GB  swap            swap        swap
+/           60 GiB      root            btrfs       Operating System
+
+# From a 100 GiB disk, this leaves some free space to use later
+
+
+BTRFS SubVolume Handling (root)
+
+@/var/log           NoCow
+...
+...
+
+BTRFS SubVolume Handling (home)
+
+@/home              NoCow
+
+
+Clock and Time Zone
+
+- Europe/Sweden
+
+
+Local User
+
+- Skip User Creation
+
+
+Authentication for the System Administator "root"
+
+- Set a hard not remembable  password
+
+
+Installation Settings
+
+- Review all Settings
+- Open  SSH port (default is blocked)
+
+
+
+Checklist after installation
+-----------------------------------------------------
+
+Default root is able to  use SSHD
+Manpages are not installed
+
+1) Normally after installation the system has prepared a post installation snapshot.
+
+# snapper list
+ex:
+
+ # | Type   | Pre # | Date                     | User | Used Space | Cleanup | Description           | Userdata     
+---+--------+-------+--------------------------+------+------------+---------+-----------------------+--------------
+0  | single |       |                          | root |            |         | current               |              
+1* | single |       | Thu Dec 31 11:27:06 2020 | root |  29.23 MiB |         | first root filesystem |              
+2  | single |       | Thu Dec 31 11:29:17 2020 | root |  10.28 MiB | number  | after installation    | important=yes
+
+
+2) Mount SLES  15.2 CD/ISO and add as repo
+
+#### [ -d /mnt/Module-Basesystem ] && zypper ar /mnt/Module-Basesystem/ "BaseSystem"
+# for x in $(find /mnt/ -type d -name "Module*") ; do zypper ar $x $(basename $x); done
+# zypper refresh
+
+
+3) set hostname if not set during installation 
+
+# hostnamectl set-hostname secretserver.mydomain.net
+
+
+4) Setup Production network interface
+
+
+5) Setup Backup network interface
