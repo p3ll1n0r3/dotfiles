@@ -1,40 +1,16 @@
 #!/usr/bin/env bash
 
-# This file runs from .xinitrc
+# This file is called from .xinitrc
 # Start our X programs
 
-# Start the notification daemon
-dunst &
-
-# Hide the mouse pointer when inactive
-unclutter --timeout=1 &
-
-# Set higher keyboard rate
-xset r rate 300 50 &
-
-# Set X keymap
-setxkbmap se &
-
-# Lock the Num
-numlockx & 
-
-# Set wallpaper if exist
-[ -f ~/.config/backgrounds/wall.png ] && xwallpaper --zoom ~/.config/backgrounds/wall.png
-
-# Compositor
-xcompmgr -c -t-5 -l-5 -r3 -o.55 -D5 -F -f &
-
-# Automount USB disks
-udiskie &
-
-# If running Power connected and chargin set full backlight
-[[ $(acpi -a | awk -F ':' '{ print $2 }') == " off-line" ]] && xbacklight -set 85 || xbacklight -set 100
-
-# Generate colors based on background image
-wal -i ~/.config/backgrounds/wall.png &
-
-# Auto lock after 5 minutes inactivity
-xautolock -time 5 -locker slock &
-
-# Disable the TouchPad
-xinput set-prop "$(xinput list |grep "Synaptics TouchPad" | awk -F'=' ' { print $2 }' | awk '{ print $1 }')" "Device Enabled" 0
+dunst &                                         # Notification daemon
+unclutter --timeout=1 &                         # Hide the moust pointer
+xset r rate 300 50 &                            # speed up keyboard
+setxkbmap se &                                  # set x keyboard mapping
+numlockx &                                      # Lock the Numlock
+[ -f ~/.config/backgrounds/wall.jpg ] && xwallpaper --zoom ~/.config/backgrounds/wall.jpg       # set the wallpaper image
+picom &
+udiskie &                                       # Automount USB disks
+[[ $(acpi -a | awk -F ':' '{ print $2 }') == " off-line" ]] && xbacklight -set 85 || xbacklight -set 100 &
+xautolock -corners --00 -time 5 -locker slock &
+~/.config/polybar/launch.sh &
