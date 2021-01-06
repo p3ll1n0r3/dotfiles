@@ -14,6 +14,7 @@ export FILE="ranger"
 
 # Alias
 alias ls='ls -la --group-directories-first --color=auto'
+alias lsd='ls -dl */'     # list only directories
 alias 'cd..'='cd ..'
 alias cp='cp -i'
 alias rm='rm -i'
