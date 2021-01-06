@@ -2,10 +2,6 @@
 
 # Profile file. Runs on login. Environmental variables are set here.
 
-# todo : 
-# add support for fish 
-# add alias for fc (both bash and fish)
-
 # Adds `~/.local/bin` and subdirectories to $PATH
 [[ -d $HOME/.local/bin/ ]] && export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 [[ -d $HOME/python ]] && export PATH="$PATH:$HOME/python/')"
@@ -14,7 +10,6 @@
 export VMMANAGER="openbox"
 export EDITOR="vim"
 export BROWSER="firefox"
-export READER="zathura"
 export FILE="ranger"
 
 # Alias
@@ -31,5 +26,3 @@ export SCREENSHOTS="${HOME}/screenshots/"
 
 # Start graphical server on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx
-
-
