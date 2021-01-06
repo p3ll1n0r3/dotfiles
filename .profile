@@ -7,7 +7,7 @@
 [[ -d $HOME/python ]] && export PATH="$PATH:$HOME/python/')"
 
 # Environment
-export VMMANAGER="openbox"
+export VMMANAGER="openbox-session"
 export EDITOR="vim"
 export BROWSER="firefox"
 export FILE="ranger"
