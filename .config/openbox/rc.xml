@@ -512,6 +512,12 @@
         <command>pavucontrol</command>
       </action>
     </keybind>
+    <keybind key="W-t">
+      <!-- Win + t =  HTOP-->
+      <action name="Execute">
+        <command>kitty -e htop</command>
+      </action>
+    </keybind>
     <keybind key="W-l">
       <!-- Win + l = Lock Screen -->
       <action name="Execute">
