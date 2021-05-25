@@ -6,8 +6,6 @@ adobe-source-code-pro-fonts
 adwaita-icon-theme
 afpfs-ng
 aic94xx-firmware
-alacritty
-alsa-card-profiles
 alsa-firmware
 alsa-lib
 alsa-plugins
@@ -15,7 +13,6 @@ alsa-topology-conf
 alsa-ucm-conf
 alsa-utils
 anki
-ant
 aom
 apr
 apr-util
@@ -33,7 +30,6 @@ atk
 atkmm
 attr
 audit
-augeas
 autoconf
 automake
 avahi
@@ -60,7 +56,6 @@ bridge-utils
 brltty
 brotli
 btrfs-progs
-bubblewrap
 buildah
 bzip2
 c-ares
@@ -73,14 +68,11 @@ cairomm
 cantarell-fonts
 cdparanoia
 celt
-celt0.5.1
-ceph-libs
 cfitsio
 chromaprint
 cifs-utils
 clang
 clucene
-cmake
 cni-plugins
 colord
 compiler-rt
@@ -140,9 +132,7 @@ fish
 flac
 flex
 fluidsynth
-fmt
 fontconfig
-fontforge
 foremost
 freerdp
 freetype2
@@ -174,13 +164,11 @@ glibc
 glibmm
 glslang
 glu
-glusterfs
 gmp
 gnome-themes-extra
 gnu-netcat
 gnupg
 gnutls
-go
 gobject-introspection-runtime
 gpgme
 gpm
@@ -208,7 +196,6 @@ gtk2
 gtk2-perl
 gtk3
 gtkmm3
-gtksourceview3
 gtksourceview4
 guile
 gumbo-parser
@@ -252,10 +239,8 @@ iputils
 iso-codes
 jack
 jansson
-jasper
 java-environment-common
 java-runtime-common
-java8-openjfx
 jbig2dec
 jdk-openjdk
 jdk8-openjdk
@@ -266,8 +251,6 @@ jre-openjdk
 jre-openjdk-headless
 jre8-openjdk
 jre8-openjdk-headless
-js60
-js68
 js78
 json-c
 json-glib
@@ -341,7 +324,6 @@ libetonyek
 libev
 libevdev
 libevent
-libewf
 libexif
 libexttextcat
 libfbclient
@@ -374,7 +356,6 @@ libimagequant
 libinih
 libinput
 libinstpatch
-libiscsi
 libisoburn
 libisofs
 libixion
@@ -388,7 +369,6 @@ liblouis
 liblqr
 liblrdf
 libluv
-libmanette
 libmaxminddb
 libmcrypt
 libmemcached
@@ -399,7 +379,6 @@ libmm-glib
 libmms
 libmnl
 libmodplug
-libmp4v2
 libmpc
 libmpcdec
 libmpdclient
@@ -458,12 +437,10 @@ libsodium
 libsoup
 libsoxr
 libspeechd
-libspiro
 libsrtp
 libssh
 libssh2
 libstaroffice
-libstemmer
 libsynctex
 libtasn1
 libteam
@@ -471,14 +448,11 @@ libtermkey
 libthai
 libtheora
 libtiff
-libtiger
 libtirpc
 libtommath
 libtool
-libuninameslist
 libunistring
 libunwind
-liburcu
 liburing
 libusb
 libutempter
@@ -499,7 +473,6 @@ libvterm
 libwacom
 libwebp
 libwpd
-libwpe
 libwpg
 libwps
 libx11
@@ -554,7 +527,6 @@ lua
 lua52
 lua53
 luajit
-lv2
 lvm2
 lxappearance
 lxmenu-data
@@ -591,7 +563,6 @@ ndctl
 neon
 neovim
 nerd-fonts-complete
-netcf
 nettle
 networkmanager
 nfs-utils
@@ -606,12 +577,10 @@ npm
 npth
 nspr
 nss
-ntfs-3g
 numactl
 numix-gtk-theme
 numlockx
 nuspell
-oath-toolkit
 obconf
 obmenu-generator
 ocl-icd
@@ -665,9 +634,7 @@ popt
 portaudio
 postgresql
 postgresql-libs
-potrace
 procps-ng
-progsreiserfs
 protobuf
 psmisc
 psuinfo
@@ -677,9 +644,7 @@ pulseaudio-bluetooth
 pwgen
 python
 python-appdirs
-python-asn1crypto
 python-attrs
-python-babel
 python-bcrypt
 python-beautifulsoup4
 python-cachecontrol
@@ -700,7 +665,6 @@ python-docker
 python-docker-pycreds
 python-dockerpty
 python-docopt
-python-docutils
 python-dotenv
 python-filelock
 python-flask
@@ -708,7 +672,6 @@ python-flask-cors
 python-gobject
 python-html5lib
 python-idna
-python-imagesize
 python-importlib-metadata
 python-itsdangerous
 python-jinja
@@ -718,7 +681,6 @@ python-kitchen
 python-lockfile
 python-markdown
 python-markupsafe
-python-more-itertools
 python-msgpack
 python-ordered-set
 python-orjson
@@ -732,18 +694,14 @@ python-protobuf
 python-psutil
 python-pyaudio
 python-pycparser
-python-pygments
 python-pynacl
 python-pyopenssl
 python-pyparsing
-python-pypeg2
 python-pyqt5
 python-pyqt5-sip
 python-pyqt5-webengine
 python-pyrsistent
 python-pysocks
-python-pytoml
-python-pytz
 python-pywal
 python-requests
 python-resolvelib
@@ -752,16 +710,7 @@ python-send2trash
 python-setuptools
 python-six
 python-slip
-python-snowballstemmer
 python-soupsieve
-python-sphinx
-python-sphinx-alabaster-theme
-python-sphinxcontrib-applehelp
-python-sphinxcontrib-devhelp
-python-sphinxcontrib-htmlhelp
-python-sphinxcontrib-jsmath
-python-sphinxcontrib-qthelp
-python-sphinxcontrib-serializinghtml
 python-systemd
 python-sysv_ipc
 python-texttable
@@ -775,10 +724,6 @@ python-werkzeug
 python-wheel
 python-yaml
 python-zipp
-python2
-python2-cairo
-python2-gobject
-python2-psutil
 qemu
 qemu-arch-extra
 qrencode
@@ -800,7 +745,6 @@ re2
 readline
 redland
 rest
-rhash
 rocketchat-desktop
 rot13
 rpcbind
@@ -809,10 +753,6 @@ rtkit
 rtmpdump
 rtv
 rubberband
-ruby
-ruby-irb
-ruby-reline
-rubygems
 run-parts
 runc
 rust
@@ -838,13 +778,10 @@ shared-mime-info
 simplescreenrecorder
 skopeo
 slang
-sleuthkit
-sleuthkit-java
 slirp4netns
 slock
 smbclient
 snappy
-sndio
 sord
 sound-theme-freedesktop
 soundtouch
@@ -884,14 +821,12 @@ tdb
 terminator
 termite
 termite-terminfo
-testdisk
 tevent
 texinfo
 thin-provisioning-tools
 tint2
 tmux
 traceroute
-tracker3
 tslib
 ttf-dejavu
 ttf-fira-code
@@ -904,7 +839,6 @@ udiskie
 udisks2
 unclutter
 unibilium
-unicode-character-database
 unicornscan
 unrar
 unzip
@@ -935,7 +869,6 @@ wavpack
 wayland
 wayland-protocols
 wd719x-firmware
-webkit2gtk
 webrtc-audio-processing
 wget
 which
@@ -944,9 +877,7 @@ wireless_tools
 wireshark-cli
 wireshark-qt
 wmctrl
-woff2
 wpa_supplicant
-wpebackend-fdo
 wxgtk-common
 wxgtk3
 x264
@@ -964,7 +895,6 @@ xcb-util-wm
 xcb-util-xrm
 xclip
 xcompmgr
-xdg-dbus-proxy
 xdg-utils
 xdotool
 xed
@@ -1006,7 +936,6 @@ xwallpaper
 xxhash
 xz
 yajl
-yarn
 yay
 youtube-dl
 yubico-c
