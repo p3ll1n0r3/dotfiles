@@ -44,11 +44,8 @@ bind
 binutils
 binwalk
 bison
-blueman
 bluez
 bluez-libs
-bluez-tools
-bluez-utils
 boost-libs
 box2d
 brave-bin
