@@ -109,7 +109,6 @@ dtc
 dunst
 e2fsprogs
 edk2-ovmf
-electron7
 elfutils
 enchant
 exfat-utils
@@ -152,7 +151,6 @@ gettext
 ghidra-bin
 giblib
 giflib
-girara
 git
 glib-networking
 glib-perl
@@ -195,7 +193,6 @@ gtk3
 gtkmm3
 gtksourceview4
 guile
-gumbo-parser
 gupnp
 gupnp-igd
 gzip
@@ -207,14 +204,11 @@ hidapi
 hsetroot
 hspell
 htop
-http-parser
 hunspell
 hwids
 hwloc
 hydra
 hyphen
-i3-wm
-i3blocks
 iana-etc
 icu
 imagemagick
@@ -238,7 +232,6 @@ jack
 jansson
 java-environment-common
 java-runtime-common
-jbig2dec
 jdk-openjdk
 jdk8-openjdk
 jemalloc
@@ -251,10 +244,11 @@ jre8-openjdk-headless
 js78
 json-c
 json-glib
-jsoncpp
 kbd
 keepassxc
 keyutils
+kitty
+kitty-terminfo
 kmod
 krb5
 kubectl
@@ -376,7 +370,6 @@ libmnl
 libmodplug
 libmpc
 libmpcdec
-libmpdclient
 libmpeg2
 libmspub
 libmwaw
@@ -436,7 +429,6 @@ libsrtp
 libssh
 libssh2
 libstaroffice
-libsynctex
 libtasn1
 libteam
 libtermkey
@@ -622,7 +614,6 @@ pixman
 pkgconf
 podman
 polkit
-polybar
 poppler
 poppler-glib
 popt
@@ -818,7 +809,6 @@ termite-terminfo
 tevent
 texinfo
 thin-provisioning-tools
-tint2
 tmux
 traceroute
 tslib
@@ -881,12 +871,10 @@ xarchiver
 xautolock
 xcb-proto
 xcb-util
-xcb-util-cursor
 xcb-util-image
 xcb-util-keysyms
 xcb-util-renderutil
 xcb-util-wm
-xcb-util-xrm
 xclip
 xcompmgr
 xdg-utils
