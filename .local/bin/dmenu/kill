@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+selection=$(ps -eo pid,cmd | grep -v "\[" | dmenu -i -l 20 -p "Kill:")
+pid=$(echo $selection | awk '{print $1}')
+
+if [ ! -z "$selection" ]
+then
+  notify-send "Killing process: " "$pid"
+  kill $pid
+fi

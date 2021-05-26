@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+terminal='terminator -e'
+selection=$(man -k . | awk '{print $1}' | dmenu -i -l 20 -p "Manpage to show :" | awk '{print $1}')
+
+if [ ! -z "$selection" ]
+then
+  terminator -f -e "man ${selection}"
+fi

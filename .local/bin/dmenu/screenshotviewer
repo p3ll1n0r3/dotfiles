@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+image_path="${HOME}/screenshots"
+selection="$(find -L $image_path -maxdepth 1 -type f | sed 's|^'$image_path/'||' | sort | dmenu -i -l 20 -p 'View image : ')"
+
+case "$selection" in
+  "") 
+    echo "no file selected to show"
+    ;;
+  *) sxiv $image_path/$selection & 
+  ;;
+esac
+

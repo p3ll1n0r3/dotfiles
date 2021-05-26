@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+python_path="${HOME}/python"
+selection="$(find -L $python_path -maxdepth 1 -type f -name *.py | sed 's|^'$python_path/'||' | sort | dmenu -i -l 20 -p 'Python Coding : ')"
+
+terminator -f -e "vim ${python_path}/${selection}" & 
+

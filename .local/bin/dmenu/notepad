@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+notes_path="${HOME}/txt"
+# selection="$(find -L $notes_path -maxdepth 1 -type f | sed 's|^'$notes_path/'||' | sort | sed '1iNew note' | dmenu -i -l 20 -p 'Notepad edit : ')"
+selection="$(find -L $notes_path -maxdepth 1 -type f | sed 's|^'$notes_path/'||' | sort | dmenu -i -l 20 -p 'Notepad edit : ')"
+
+case "$selection" in
+  "") 
+    echo "no file selected to edit"
+    ;;
+  *) xed $notes_path/$selection & 
+  ;;
+esac
+

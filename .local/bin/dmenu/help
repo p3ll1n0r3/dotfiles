@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+helptext="
+Exit Logout               : Logout from Openbox
+Display                   : Change Monitor Properties
+
+Manpage                   : Manpage search
+IPCalc                    : IP Calculator
+Password Generator        : Generate a 24 char password with no misinterpreted characters
+
+PrintScreen               : Screenshot dmenu
+Screenshot Viewer         : Select/View screenshots
+
+Shortcuts
+
+W - Enter                 : Terminal
+W - a                     : Dmenu Main Menu
+W - c                     : Microsoft Visual Code Studio
+W - d                     : Dmenu
+W - e                     : Terminal File Manager Ranger
+W - Shift - e             : Graphical File Manager PCManFM
+W - h                     : This help screen
+W - l                     : Lock Screen
+W - n                     : Dmenu nmcli manager
+W - p                     : Dmenu Password Manager (NOT installed)
+W - r                     : Openbox Reconfigure
+W - Shift - x             : Openbox Poweroff
+W - v                     : Virtual Manager
+W - w                     : Firefox
+
+Window Management
+
+A - [0-9]                 : Switch to Workspace [0-9]
+W - Shift - [0-9]         : Move Window to Workspace [0-9]
+W - q                     : Quit/Close Window
+W - m                     : Hide Window
+W - [1-2]                 : Move/Maximize Window to monitor [1-2]
+W - Right                 : Move Window to 50% right of monitor
+W - Left                  : Move Window to 50% left of monitor
+W - Up                    : Move Window to 50% top of monitor
+W - Down                  : Move Window to 50% bottom of monitor
+
+TODO:
+Start/Stop Screenrecording
+Search Web
+Search Youtube video
+"
+
+selection=$(echo "$helptext" | dmenu -i -l 40 -p 'Help Menu' | awk -F":" {'print $1'} | sed 's/ *$//g')
+
+case "$selection" in
+  "W - a")  sleep 0.2 && ~/.local/bin/dmenumain
+  ;;
+  "W - Enter") terminator
+  ;;
+  "W - c") code --disable-gpu
+  ;;
+  "W - e") terminator -e "ranger"
+  ;;
+  "W - Shift - e") pcmanfm
+  ;;
+  "W - w") firefox
+  ;;
+  "W - l") /usr/bin/slock
+  ;;
+  "W - r") openbox --reconfigure
+  ;;
+  "W - v") virt-manager
+  ;;
+  "PrintScreen") sleep 0.2 && ~/.local/bin/dmenu/scrot
+  ;;
+  "Display") sleep 0.2 && ~/.local/bin/dmenu/display
+  ;;
+  "W - Shift - x") poweroff
+  ;;
+  "IPCalc") terminator -e ipcalc.sh 
+  ;;
+  "Password Generator") terminator -e passwordgen.sh
+  ;;
+  "Manpage") ~/.local/bin/dmenu/manpage
+  ;;
+  "Screenshot Viewer") sleep 0.2 && ~/.local/bin/dmenu/screenshotviewer
+  ;;
+  "Exit Logout") openbox --exit
+  ;;
+esac
+

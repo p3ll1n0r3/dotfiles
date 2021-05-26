@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+options='
+left extend
+right extend
+hdmi2 only
+edp1 only
+'
+selection=$(echo "${options}" | dmenu -i -l 20 -p "Select display option:")
+
+case "$selection" in
+  "left extend") xrandr --output eDP1 --auto && sleep 3 && xrandr --output HDMI2 --auto --left-of eDP1 && sleep3
+  ;;
+  "right extend") xrandr --output eDP1 --auto && sleep 3 &&  xrandr --output HDMI2 --auto --right-of eDP1 && sleep 3
+  ;;
+  "edp1 only") xrandr --output eDP1 --auto && sleep 3 && xrandr --output HDMI2 --off
+  ;;
+  "hdmi2 only") xrandr --output HDMI2 --auto && sleep 3 && xrandr --output eDP1 --off
+esac

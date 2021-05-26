@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+configfiles="
+openbox     : ${HOME}/.config/openbox/rc.xml
+bashrc      : ${HOME}/.bashrc
+vimrc       : ${HOME}/.vimrc
+profile     : ${HOME}/.profile
+xprofile    : ${HOME}/.xprofile
+xinitrc     : ${HOME}/.xinitrc
+Xresources  : ${HOME}/.Xresources
+"
+
+selection=$(echo "${configfiles}" | dmenu -i -l 20 -p "Config file to edit : " | awk {'print $3'} )
+
+if [ ! -z "$selection" ]
+then
+  notify-send "Xed editing file : " "$selection" &
+  xed $selection &
+fi
+
