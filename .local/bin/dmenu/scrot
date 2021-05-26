@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+options="select_area
+delayed_full_screen
+cancel
+"
+
+cmd=$(dmenu -l 20 -nf '#999' -nb '#292d3e' -sf '#eee' -sb '#0077bb' -p 'Choose screenshot type' <<< "$options")
+
+case ${cmd%% *} in
+
+	select_area) notify-send 'SCROT' 'Select screenshot area or window' && scrot -bs ${SCREENSHOTS}capture_select_%Y-%m-%d_%H-%M-%S.png -e 'xclip -selection c -t image/png < $f' && notify-send 'SCROT' 'Selected Area Captured, Saved, Clipboard';;
+	delayed_full_screen) scrot -d 1 ${SCREENSHOTS}capture_fullscreen_%Y-%m-%d_%H-%M-%S.png -e 'xclip -selection c -t image/png < $f' && notify-send 'SCROT' 'Fullscreen Captures, Saved, Clipboard' ;;
+	cancel) notify-send "Screenshot cancelled" ;; 
+	*) notify-send "Nothing selected" ;;
+
+esac
