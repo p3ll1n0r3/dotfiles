@@ -24,6 +24,7 @@ W - l                     : Lock Screen
 W - n                     : Dmenu nmcli manager
 W - p                     : Dmenu Password Manager (NOT installed)
 W - r                     : Openbox Reconfigure
+W - s                     : PAVU sound Volume Control Panel
 W - Shift - x             : Openbox Poweroff
 W - v                     : Virtual Manager
 W - w                     : Firefox
